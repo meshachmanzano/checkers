@@ -11,7 +11,27 @@ type Square = {
     "king": boolean
 }
 
+type Player = {
+    "teamBlack": boolean
+}
+
 function App() {
+
+    const [playerColour, setPlayerColour] = useState<string>("")
+
+    const start = () => {
+        fetch("http://localhost:8080/start").then(response => {
+            response.json().then(json => {
+                if (json.player) {
+                    setPlayerColour("black")
+                }
+                else {
+                    setPlayerColour("red")
+                }
+            })
+        })
+    }
+    useEffect(start, []);
 
     const getFENString = (pieces: Square[]): string => {
         let fen = ""
@@ -42,6 +62,7 @@ function App() {
         console.log("FEN " + fen);
         return fen;
     }
+
     const [boardState, setBoardState] = useState<string>("1p1p1p1p/p1p1p1p1/1p1p1p1p/8/8/P1P1P1P1/1P1P1P1P/P1P1P1P1");
 
     const refresh = () => {
@@ -60,6 +81,15 @@ function App() {
     }
 
     useEffect(refresh, []);
+
+    useEffect(() => {
+        const refreshId = setInterval(refresh, 1000);
+        return function cleanup() {
+            clearInterval(refreshId)
+        }
+    }
+    , [])
+
 
     return (
         <div className="first-project">
@@ -121,8 +151,8 @@ function App() {
                             method: "POST",
                             body: JSON.stringify({
                                 posFrom: {x: xNumberValueStart, y: yNumberValueStart},
-                                posTos: {x: xNumberValueEnd, y: yNumberValueEnd},
-                                playerColour: piece.split("")[0] === "w" ? "red" : "black"
+                                posTo: {x: xNumberValueEnd, y: yNumberValueEnd},
+                                playerColour
                             })
                         })
                             .then(response => {
@@ -138,6 +168,7 @@ function App() {
                     refresh();
                 }}>REFRESH
                 </button>
+
 
             </header>
         </div>
