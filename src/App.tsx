@@ -11,11 +11,25 @@ type Square = {
     "king": boolean
 }
 
-type Player = {
-    "teamBlack": boolean
-}
+
 
 function App() {
+
+   const [winnerState, setWinner] = useState<string>("")
+
+    const winner = () => {
+       fetch("http://localhost:8080/board").then(response => {
+           response.json().then(json => {
+               if (json.win) {
+                   setWinner("black")
+               }
+               else {
+                   setWinner("red")
+               }
+           })
+       })
+    }
+    useEffect(winner, []);
 
     const [playerColour, setPlayerColour] = useState<string>("")
 
@@ -92,10 +106,21 @@ function App() {
 
 
     return (
-        <div className="first-project">
-            <header className="project-header">
+        <div className="container">
+            <div className="chessboard">
 
                 <Chessboard
+                    customDarkSquareStyle={{ backgroundColor: '#A9A9A9' }}
+                    customLightSquareStyle={{ backgroundColor: '#FFF8DC' }}
+                    //customPieces={{wP:({
+
+                       // })}}
+                    boardWidth={500}
+                    customBoardStyle={{
+                        borderRadius: '5px',
+                        boxShadow: '0 0 30px 0 #08fdd8',
+                    }}
+                    showBoardNotation={false}
                     arePiecesDraggable
                     position={boardState}
                     onPieceDrop={(sourceSquare, targetSquare, piece) => {
@@ -170,7 +195,7 @@ function App() {
                 </button>
 
 
-            </header>
+            </div>
         </div>
     );
 }

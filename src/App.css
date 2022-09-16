@@ -13,15 +13,20 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
+  background-color: #040f3f;
+  height: 100%;
+}
+
+.chessboard {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 0px;
+  color: #a11a1a;
+  height: 100vh;
+  box-shadow: 0 0 18px 0 #08fdd8;
 }
 
 .App-link {
