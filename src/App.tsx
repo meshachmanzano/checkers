@@ -36,7 +36,7 @@ function App() {
     const start = () => {
         fetch("http://localhost:8080/start").then(response => {
             response.json().then(json => {
-                if (json.player) {
+                if (json.player === 1) {
                     setPlayerColour("black")
                 }
                 else {
