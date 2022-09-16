@@ -17,20 +17,6 @@ function App() {
 
    const [winnerState, setWinner] = useState<string>("")
 
-    const winner = () => {
-       fetch("http://localhost:8080/board").then(response => {
-           response.json().then(json => {
-               if (json.win) {
-                   setWinner("black")
-               }
-               else {
-                   setWinner("red")
-               }
-           })
-       })
-    }
-    useEffect(winner, []);
-
     const [playerColour, setPlayerColour] = useState<string>("")
 
     const start = () => {
