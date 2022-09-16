@@ -94,21 +94,27 @@ function App() {
     return (
         <div className="container">
             <div className="chessboard">
-
+               <div className="team-name">{playerColour}</div>
                 <Chessboard
-                    customDarkSquareStyle={{ backgroundColor: '#A9A9A9' }}
-                    customLightSquareStyle={{ backgroundColor: '#FFF8DC' }}
+                    customDarkSquareStyle={{ backgroundColor: '#000000' }}
+                    customLightSquareStyle={{ backgroundColor: '#212121' }}
                     //customPieces={{wP:({
 
                        // })}}
-                    boardWidth={500}
+                    boardWidth={470}
                     customBoardStyle={{
                         borderRadius: '5px',
-                        boxShadow: '0 0 30px 0 #08fdd8',
+                        boxShadow: '0 0 1.3rem #bc13fe',
                     }}
                     showBoardNotation={false}
                     arePiecesDraggable
                     position={boardState}
+                    customPieces={{
+                        wP:() => <div className="red-piece"></div>,
+                        bP:() => <div className="black-piece"></div>,
+                        wQ:() => <div className="red-queen"></div>,
+                        bQ:() => <div className="black-queen"></div>
+                        }}
                     onPieceDrop={(sourceSquare, targetSquare, piece) => {
 
                         const startCoord = sourceSquare.split('');
@@ -173,7 +179,6 @@ function App() {
                         return true;
                     }}
                 />
-                {boardState}
                 <button onClick={() => {
                     setBoardState("loading...");
                     refresh();

@@ -14,8 +14,31 @@
 }
 
 .container {
-  background-color: #040f3f;
+  background-color: black;
   height: 100%;
+}
+
+.team-name {
+  font-size: 3rem;
+  text-transform: uppercase;
+  padding: 10px;
+  box-shadow: 0 0 .2rem #fff,
+  0 0 .2rem #fff,
+  0 0 2rem #bc13fe,
+  0 0 0.8rem #bc13fe,
+  0 0 2.8rem #bc13fe,
+  inset 0 0 1.3rem #bc13fe;
+  color: #fff;
+  text-shadow:
+          0 0 7px #fff,
+          0 0 10px #fff,
+          0 0 21px #fff,
+          0 0 42px #0fa,
+          0 0 82px #0fa,
+          0 0 92px #0fa,
+          0 0 102px #0fa,
+          0 0 151px #0fa;
+  font-family: "Vibur", sans-serif;
 }
 
 .chessboard {
@@ -23,14 +46,61 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 0px;
-  color: #a11a1a;
+  color: white;
   height: 100vh;
-  box-shadow: 0 0 18px 0 #08fdd8;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.red-piece {
+  height: 50px;
+  width: 50px;
+  background-image: linear-gradient(red, orange);
+  border-radius: 50%;
+  display: inline-block;
+  align-items: center;
+  margin-top: 1px;
+  border: 3px solid #1e90ff;
+  box-shadow: 0 0 15px 0 #1E90FF
+}
+
+.red-queen {
+  height: 50px;
+  width: 50px;
+  background-image: linear-gradient(orange, red);
+  border-radius: 50%;
+  display: inline-block;
+  align-items: center;
+  margin-top: 1px;
+  border: 3px solid #DAA520;
+  box-shadow: 0 0 15px 0 #FFD700
+}
+
+
+.black-piece {
+  height: 50px;
+  width: 50px;
+  background-image: linear-gradient(black, navy);
+  border-radius: 50%;
+  display: inline-block;
+  align-items: center;
+  margin-top: 1px;
+  border: 3px solid #fe13ff;
+  box-shadow: 0 0 15px 0 #FF1493
+}
+
+.black-queen {
+  height: 50px;
+  width: 50px;
+  background-image: linear-gradient(navy, black);
+  border-radius: 50%;
+  display: inline-block;
+  align-items: center;
+  margin-top: 1px;
+  border: 3px solid #DAA520;
+  box-shadow: 0 0 15px 0 #FFD700
 }
 
 @keyframes App-logo-spin {
