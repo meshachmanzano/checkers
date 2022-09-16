@@ -112,8 +112,8 @@ function App() {
                     customPieces={{
                         wP:() => <div className="red-piece"></div>,
                         bP:() => <div className="black-piece"></div>,
-                        wQ:() => <div className="red-queen"></div>,
-                        bQ:() => <div className="black-queen"></div>
+                        wK:() => <div className="red-king"></div>,
+                        bK:() => <div className="black-king"></div>
                         }}
                     onPieceDrop={(sourceSquare, targetSquare, piece) => {
 
