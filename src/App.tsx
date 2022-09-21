@@ -82,7 +82,7 @@ function App() {
                         if (getFENString(body.board) !== boardState) {
                             setBoardState(getFENString(body.board));
                             if (body.winner) {
-                                setWinner(true)
+                                setWinner(false)
                             }
                             setPlayerTurn(true)
                         }
@@ -197,7 +197,6 @@ function App() {
                     {winnerState ? <div className="winner">WINNER</div> : null}
                 </div>
             </div>
-        </>
     );
 }
 
