@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import MyComponent from "./MyComponent"
+import Neon from './video/Neon.mp4'
+import Hill from './video/Hill.mp4'
 import {Chessboard} from "react-chessboard";
-import {webcrypto} from "crypto";
+
 
 
 type Square = {
@@ -18,7 +19,7 @@ function App() {
 
 
 
-    const [playerTurn, setPlayerTurn] = useState<boolean>(true)
+    const [playerTurn, setPlayerTurn] = useState<boolean>(false)
 
 
     const [playerColour, setPlayerColour] = useState<string>("")
@@ -67,7 +68,7 @@ function App() {
     }
 
     const [boardState, setBoardState] = useState<string>("1p1p1p1p/p1p1p1p1/1p1p1p1p/8/8/P1P1P1P1/1P1P1P1P/P1P1P1P1");
-    const [winnerState, setWinner] = useState<boolean>(true)
+    const [winnerState, setWinner] = useState<boolean>(false)
 
     const refresh = () => {
         fetch("http://localhost:8080/board", {
@@ -82,7 +83,9 @@ function App() {
                         if (getFENString(body.board) !== boardState) {
                             setBoardState(getFENString(body.board));
                             if (body.winner) {
-                                setWinner(false)
+                                console.log("WON" + body.winner)
+                                setWinner(true)
+                                setWinnerColourState(body.winner)
                             }
                             setPlayerTurn(true)
                         }
@@ -92,6 +95,7 @@ function App() {
 
     }
 
+    const [winnerColourState, setWinnerColourState] = useState<string>("")
 
     useEffect(refresh, []);
 
@@ -105,7 +109,14 @@ function App() {
 
 
     return (
-            <div className="container">
+
+        <div className="container">
+            <video autoPlay muted loop id="myVideo">
+                <source src={Neon} type="video/mp4"/>
+            </video>
+            <video autoPlay loop id="myMusic">
+                <source src={Hill} type={"video/mp4"}/>
+            </video>
                 <div className="chessboard">
                     <div className="team-name">{playerColour}</div>
                     <Chessboard
@@ -114,7 +125,7 @@ function App() {
                         boardWidth={470}
                         customBoardStyle={{
                             borderRadius: '5px',
-                            boxShadow: '0 0 1.2rem #bc13fe',
+                            boxShadow: '0 0 1.2rem #0fa',
                         }}
                         showBoardNotation={false}
                         arePiecesDraggable
@@ -194,7 +205,8 @@ function App() {
                     }}>REFRESH
                     </button>
 
-                    {winnerState ? <div className="winner">WINNER</div> : null}
+                    {winnerState ? <div className="winner">WINNER {winnerColourState.toUpperCase()}</div> : null}
+
                 </div>
             </div>
     );
